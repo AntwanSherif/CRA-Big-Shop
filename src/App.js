@@ -1,11 +1,4 @@
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  VStack,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, Grid, theme } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './components/ColorModeSwitcher';
 import { ProductCard } from './components/ProductCard';
@@ -24,15 +17,18 @@ function App() {
       <Box textAlign="center" fontSize="xl">
         <Grid minH="100vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Text>
-              Welcome to <Text fontSize="3xl">Everything React!</Text>
-            </Text>
-
+          <Heading as="h3" size="2xl" color="teal.400">
+            BIG SHOP!
+          </Heading>
+          <Grid templateColumns="repeat(4, 1fr)" gap={6} mt={20}>
             {products.map(({ id, title, image, price }) => (
-              <ProductCard key={id} {...{ title, image, price }} />
+              <ProductCard
+                key={id}
+                {...{ title, image, price }}
+                isNew={!(id % 3)}
+              />
             ))}
-          </VStack>
+          </Grid>
         </Grid>
       </Box>
     </ChakraProvider>

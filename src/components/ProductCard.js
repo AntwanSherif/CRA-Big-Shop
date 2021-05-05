@@ -1,23 +1,37 @@
-import { Box, Image, Badge } from '@chakra-ui/react';
+import { Box, Image, Badge, Text } from '@chakra-ui/react';
 
-export function ProductCard({ id, title, image, price }) {
+export function ProductCard({ id, title, image, price, isNew }) {
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      maxW="sm"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      pos="relative"
+    >
+      {isNew && (
+        <Box d="flex" justifyContent="flex-end" pos="absolute" right={0}>
+          <Badge
+            borderRadius="md"
+            px="2"
+            colorScheme="teal"
+            justifySelf="flex-end"
+          >
+            New
+          </Badge>
+        </Box>
+      )}
+
       <Image
         src={image}
         alt={title}
         boxSize="250px"
         objectFit="contain"
         mx="auto"
+        mt={5}
       />
 
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="teal">
-            New
-          </Badge>
-        </Box>
-
         <Box
           mt="1"
           fontWeight="semibold"
@@ -28,12 +42,7 @@ export function ProductCard({ id, title, image, price }) {
           {title}
         </Box>
 
-        <Box>
-          {price}
-          <Box as="span" color="gray.600" fontSize="sm">
-            / wk
-          </Box>
-        </Box>
+        <Text fontSize="md">${price}</Text>
       </Box>
     </Box>
   );
