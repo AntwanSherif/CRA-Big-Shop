@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ColorModeSwitcher } from './components/ColorModeSwitcher';
+import { ProductCard } from './components/ProductCard';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -29,11 +30,7 @@ function App() {
             </Text>
 
             {products.map(({ id, title, image, price }) => (
-              <div key={id}>
-                <h4>{title}</h4>
-                <div>{price}</div>
-                <img src={image} width={100} height={100} alt={title} />
-              </div>
+              <ProductCard key={id} {...{ title, image, price }} />
             ))}
           </VStack>
         </Grid>
