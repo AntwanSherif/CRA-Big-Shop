@@ -1,13 +1,6 @@
-import {
-  ChakraProvider,
-  Box,
-  Heading,
-  Grid,
-  Spinner,
-  theme,
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, Grid, Spinner, theme } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { ColorModeSwitcher } from './components/ColorModeSwitcher';
+import { Header, HEADER_HEIGHT } from './components/Header';
 import { ProductCard } from './components/ProductCard';
 
 function App() {
@@ -28,12 +21,9 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign='center' fontSize='xl'>
-        <Grid minH='100vh' p={3}>
-          <ColorModeSwitcher justifySelf='flex-end' />
-          <Heading as='h3' size='2xl' color='teal.400'>
-            BIG SHOP!
-          </Heading>
+        <Header />
 
+        <Grid minH={`calc(100vh - ${HEADER_HEIGHT})`} p={3}>
           {loading && (
             <Spinner
               thickness='4px'
