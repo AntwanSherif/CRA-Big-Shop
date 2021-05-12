@@ -25,7 +25,7 @@ export function ProductCard({ id, title, image, price, isNew }) {
       <Image
         src={image}
         alt={title}
-        boxSize='250px'
+        boxSize={{ base: '150px', sm: '200px', md: '250px' }}
         objectFit='contain'
         mx='auto'
         mt={5}

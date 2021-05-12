@@ -49,7 +49,19 @@ function App() {
             )}
 
             {!loading && (
-              <Grid templateColumns='repeat(4, 1fr)' gap={6} mt={20}>
+              <Grid
+                templateColumns={{
+                  base: 'repeat(1, 1fr)',
+                  sm: 'repeat(2, 1fr)',
+                  md: 'repeat(3, 1fr)',
+                  lg: 'repeat(4, 1fr)',
+                }}
+                gap={{
+                  base: 4,
+                  lg: 6,
+                }}
+                mt={20}
+              >
                 {products.map(({ id, title, image, price }) => (
                   <ProductCard
                     key={id}
