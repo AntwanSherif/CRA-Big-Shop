@@ -9,10 +9,12 @@ import {
 import { useEffect, useState } from 'react';
 import { Header, HEADER_HEIGHT } from './components/Header';
 import { ProductCard } from './components/ProductCard';
+import { Searchbar } from './components/Searchbar';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -31,6 +33,10 @@ function App() {
         <Header />
 
         <Container maxW='container.xl' h='100%'>
+          <Box mt={5} px={3}>
+            <Searchbar value={searchTerm} onChange={setSearchTerm} />
+          </Box>
+
           <Grid minH={`calc(100vh - ${HEADER_HEIGHT})`} p={3}>
             {loading && (
               <Spinner
