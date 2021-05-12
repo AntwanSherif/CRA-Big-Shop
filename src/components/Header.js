@@ -1,4 +1,5 @@
 import { Container, Box, Flex, Spacer, Heading } from '@chakra-ui/react';
+import { CartIcon } from './CartIcon';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 export const HEADER_HEIGHT = '80px';
@@ -12,6 +13,7 @@ export function Header() {
             BIG SHOP!
           </Heading>
           <Spacer />
+          <CartIcon numberOfAddedToBasketItems={0} />
           <ColorModeSwitcher justifySelf='flex-end' />
         </Flex>
       </Container>
