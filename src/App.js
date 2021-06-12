@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
 
-    fetch('https://fakestoreapi.com/products')
+    fetch('/products')
       .then(res => res.json())
       .then(json => {
         setLoading(false);
