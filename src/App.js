@@ -6,6 +6,7 @@ import {
   theme,
   Container,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Header, HEADER_HEIGHT } from './components/Header';
 import { ProductCard } from './components/ProductCard';
@@ -19,12 +20,14 @@ function App() {
   useEffect(() => {
     setLoading(true);
 
-    fetch('/products')
-      .then(res => res.json())
-      .then(json => {
-        setLoading(false);
-        setProducts(json);
-      });
+    const fetchData = async () => {
+      const { data } = await axios.get('/products');
+
+      setLoading(false);
+      setProducts(data);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -62,12 +65,8 @@ function App() {
                 }}
                 mt={20}
               >
-                {products.map(({ id, title, image, price }) => (
-                  <ProductCard
-                    key={id}
-                    {...{ title, image, price }}
-                    isNew={!(id % 3)}
-                  />
+                {products.map(({ id, title, image, price, label }) => (
+                  <ProductCard key={id} {...{ title, image, price, label }} />
                 ))}
               </Grid>
             )}

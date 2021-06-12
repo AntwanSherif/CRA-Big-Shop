@@ -7,7 +7,8 @@
     "category": "men's clothing",
     "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
     "availableQuantity": 10,
-    "inStock": true
+    "inStock": true,
+    "label": "new"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "category": "men's clothing",
     "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
     "availableQuantity": 8,
-    "inStock": true
+    "inStock": true,
+    "label": "new"
   },
   {
     "id": 3,
@@ -57,7 +59,8 @@
     "category": "jewelery",
     "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
     "availableQuantity": 1,
-    "inStock": true
+    "inStock": true,
+    "label": "last piece"
   },
   {
     "id": 7,
@@ -87,7 +90,8 @@
     "category": "electronics",
     "image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
     "availableQuantity": 0,
-    "inStock": false
+    "inStock": false,
+    "label": "out of stock"
   },
   {
     "id": 10,
@@ -127,7 +131,8 @@
     "category": "electronics",
     "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
     "availableQuantity": 0,
-    "inStock": false
+    "inStock": false,
+    "label": "out of stock"
   },
   {
     "id": 14,
@@ -147,7 +152,8 @@
     "category": "women's clothing",
     "image": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
     "availableQuantity": 0,
-    "inStock": false
+    "inStock": false,
+    "label": "out of stock"
   },
   {
     "id": 16,
@@ -167,7 +173,8 @@
     "category": "women's clothing",
     "image": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
     "availableQuantity": 10,
-    "inStock": true
+    "inStock": true,
+    "label": "new"
   },
   {
     "id": 18,

@@ -1,6 +1,12 @@
 import { Box, Image, Badge, Text } from '@chakra-ui/react';
 
-export function ProductCard({ id, title, image, price, isNew }) {
+const LABELS_COLORS = {
+  new: 'teal',
+  'out of stock': 'red',
+  'last piece': 'yellow',
+};
+
+export function ProductCard({ id, title, image, price, label }) {
   return (
     <Box
       maxW='sm'
@@ -9,15 +15,15 @@ export function ProductCard({ id, title, image, price, isNew }) {
       overflow='hidden'
       pos='relative'
     >
-      {isNew && (
+      {label && (
         <Box d='flex' justifyContent='flex-end' pos='absolute' right={0}>
           <Badge
             borderRadius='md'
             px='2'
-            colorScheme='teal'
+            colorScheme={LABELS_COLORS[label] ?? 'teal'}
             justifySelf='flex-end'
           >
-            New
+            {label}
           </Badge>
         </Box>
       )}
