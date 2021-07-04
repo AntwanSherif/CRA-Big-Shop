@@ -1,6 +1,6 @@
 import { Box, Grid, Spinner, Container } from '@chakra-ui/react';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { getProducts } from '../api/products';
 import { HEADER_HEIGHT } from '../components/Header';
 import { ProductCard } from '../components/ProductCard';
 import { Searchbar } from '../components/Searchbar';
@@ -14,7 +14,7 @@ export default function Products() {
     setLoading(true);
 
     const fetchData = async () => {
-      const { data } = await axios.get('/products');
+      const data = await getProducts();
 
       setLoading(false);
       setProducts(data);
