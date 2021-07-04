@@ -6,8 +6,6 @@ import {
 
 export const CartIcon = ({ numberOfAddedToBasketItems = 0 }) => {
   const isEmpty = numberOfAddedToBasketItems === 0;
-  const navigateToCheckout = () =>
-    console.log('Should navigate to checkout page');
 
   return (
     <IconButton
@@ -17,7 +15,6 @@ export const CartIcon = ({ numberOfAddedToBasketItems = 0 }) => {
       variant='ghost'
       color='current'
       marginLeft='2'
-      onClick={navigateToCheckout}
       icon={isEmpty ? <EmptyCart /> : <Cart />}
     />
   );
