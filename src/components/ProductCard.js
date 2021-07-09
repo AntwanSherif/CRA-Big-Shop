@@ -1,4 +1,4 @@
-import { Box, Image, Badge, Text } from '@chakra-ui/react';
+import { Box, Image, Badge, Text, Button } from '@chakra-ui/react';
 
 const LABELS_COLORS = {
   new: 'teal',
@@ -6,7 +6,7 @@ const LABELS_COLORS = {
   'last piece': 'yellow',
 };
 
-export function ProductCard({ id, title, image, price, label }) {
+export function ProductCard({ id, title, image, price, label, onAddToCart }) {
   return (
     <Box
       maxW='sm'
@@ -50,6 +50,16 @@ export function ProductCard({ id, title, image, price, label }) {
 
         <Text fontSize='md'>${price}</Text>
       </Box>
+
+      <Button
+        w='100%'
+        h={50}
+        colorScheme='teal'
+        borderTopRadius='none'
+        onClick={onAddToCart}
+      >
+        Add to Cart
+      </Button>
     </Box>
   );
 }
