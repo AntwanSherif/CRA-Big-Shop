@@ -2,7 +2,6 @@ import { Box, Grid, Heading, HStack, Container } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { getCategories, getProducts } from '../api/products';
 import CategoryLabel from '../components/CategoryLabel';
-import { HEADER_HEIGHT } from '../components/Header';
 import LoadingSpinner from '../components/LoadingSpinner';
 import PageLayout from '../components/PageLayout';
 import { ProductCard } from '../components/ProductCard';
@@ -14,6 +13,7 @@ export default function Products() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState();
 
   const isSuccess = !isLoading && !isError;
 
@@ -23,7 +23,7 @@ export default function Products() {
     const fetchData = async () => {
       try {
         const [productsData, categoriesData] = await Promise.all([
-          getProducts(),
+          getProducts(filter),
           getCategories(),
         ]);
 
@@ -37,7 +37,7 @@ export default function Products() {
     };
 
     fetchData();
-  }, []);
+  }, [filter]);
 
   return (
     <PageLayout>
@@ -67,7 +67,14 @@ export default function Products() {
                   Quick Filter:
                 </Heading>
                 {categories.map(category => (
-                  <CategoryLabel key={category}>{category}</CategoryLabel>
+                  <CategoryLabel
+                    key={category}
+                    onClick={() =>
+                      setFilter(filter === category ? undefined : category)
+                    }
+                  >
+                    {category}
+                  </CategoryLabel>
                 ))}
               </>
             </HStack>
