@@ -1,4 +1,4 @@
-import { Box, Grid, Heading, HStack } from '@chakra-ui/react';
+import { Box, Grid, Heading, HStack, Container } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { getCategories, getProducts } from '../api/products';
 import CategoryLabel from '../components/CategoryLabel';
@@ -45,9 +45,19 @@ export default function Products() {
         <Searchbar value={searchTerm} onChange={setSearchTerm} />
       </Box>
 
-      <Grid minH={`calc(100vh - ${HEADER_HEIGHT})`} p={3}>
-        {isLoading && <LoadingSpinner />}
-        {isError && <Heading color='red.400'>{isError}</Heading>}
+      <Grid minH='50vh' p={3}>
+        {isLoading && (
+          <Container centerContent justifyContent='center'>
+            <LoadingSpinner />
+          </Container>
+        )}
+        {isError && (
+          <Container centerContent justifyContent='center'>
+            <Heading color='red' size='lg'>
+              An error occurred. Try again later.
+            </Heading>
+          </Container>
+        )}
 
         {isSuccess && (
           <>
