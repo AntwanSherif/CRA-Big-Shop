@@ -1,3 +1,5 @@
+import PageLayout from '../components/PageLayout';
+
 export default function Cart() {
-  return <div>Cart</div>;
+  return <PageLayout>Cart</PageLayout>;
 }

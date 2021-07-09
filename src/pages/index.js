@@ -1,65 +1,87 @@
-import { Box, Grid, Spinner, Container } from '@chakra-ui/react';
+import { Box, Grid, Heading, HStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { getProducts } from '../api/products';
+import { getCategories, getProducts } from '../api/products';
+import CategoryLabel from '../components/CategoryLabel';
 import { HEADER_HEIGHT } from '../components/Header';
+import LoadingSpinner from '../components/LoadingSpinner';
+import PageLayout from '../components/PageLayout';
 import { ProductCard } from '../components/ProductCard';
 import { Searchbar } from '../components/Searchbar';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const isSuccess = !isLoading && !isError;
+
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
 
     const fetchData = async () => {
-      const data = await getProducts();
+      try {
+        const [productsData, categoriesData] = await Promise.all([
+          getProducts(),
+          getCategories(),
+        ]);
 
-      setLoading(false);
-      setProducts(data);
+        setProducts(productsData);
+        setCategories(categoriesData);
+      } catch (isError) {
+        setIsError('Something went wrong. Please try again!');
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
   }, []);
 
   return (
-    <Container maxW='container.xl' h='100%'>
+    <PageLayout>
       <Box mt={5} px={3}>
         <Searchbar value={searchTerm} onChange={setSearchTerm} />
       </Box>
 
       <Grid minH={`calc(100vh - ${HEADER_HEIGHT})`} p={3}>
-        {loading && (
-          <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-          />
-        )}
+        {isLoading && <LoadingSpinner />}
+        {isError && <Heading color='red.400'>{isError}</Heading>}
 
-        {!loading && (
-          <Grid
-            templateColumns={{
-              base: 'repeat(1, 1fr)',
-              sm: 'repeat(2, 1fr)',
-              md: 'repeat(3, 1fr)',
-              lg: 'repeat(4, 1fr)',
-            }}
-            gap={{
-              base: 4,
-              lg: 6,
-            }}
-            mt={20}
-          >
-            {products.map(({ id, title, image, price, label }) => (
-              <ProductCard key={id} {...{ title, image, price, label }} />
-            ))}
-          </Grid>
+        {isSuccess && (
+          <>
+            <HStack>
+              <>
+                <Heading size='sm' fontWeight='normal' mr={3}>
+                  Quick Filter:
+                </Heading>
+                {categories.map(category => (
+                  <CategoryLabel key={category}>{category}</CategoryLabel>
+                ))}
+              </>
+            </HStack>
+
+            <Grid
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                sm: 'repeat(2, 1fr)',
+                md: 'repeat(3, 1fr)',
+                lg: 'repeat(4, 1fr)',
+              }}
+              gap={{
+                base: 4,
+                lg: 6,
+              }}
+              mt={16}
+            >
+              {products.map(({ id, title, image, price, label }) => (
+                <ProductCard key={id} {...{ title, image, price, label }} />
+              ))}
+            </Grid>
+          </>
         )}
       </Grid>
-    </Container>
+    </PageLayout>
   );
 }
