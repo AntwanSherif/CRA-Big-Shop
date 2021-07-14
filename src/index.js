@@ -1,9 +1,12 @@
 import { ColorModeScript } from '@chakra-ui/react';
+import axios from 'axios';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+
+axios.defaults.baseURL = 'http://localhost:3001';
 
 ReactDOM.render(
   <StrictMode>
