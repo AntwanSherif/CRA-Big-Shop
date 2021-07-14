@@ -67,7 +67,10 @@ export default function Products() {
               mt={16}
             >
               {products.map(({ _id, title, image, price, label }) => (
-                <ProductCard key={_id} {...{ title, image, price, label }} />
+                <ProductCard
+                  key={_id}
+                  {...{ _id, title, image, price, label }}
+                />
               ))}
             </Grid>
           </>
